@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head lang="pl">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Registration Form</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+</head>
+<body>
+<div class="wrap">
+    <form autocomplete="off" action="#" th:action="@{registration}" th:object="${user}" method="post"
+          class="form-horizontal" role="form">
+        <div>
+            <h2>Formularz rejestracyjny</h2>
+        </div>
+        <div class="form-group">
+            <label th:if="${#fields.hasErrors('name')}" th:errors="*{name}" class="validation-message"></label>
+            <input type="text" th:field="*{name}" placeholder="Imię" class="i1"/>
+        </div>
+        <div class="form-group">
+            <label th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}" class="validation-message"></label>
+            <input type="text" th:field="*{lastName}" placeholder="Nazwisko" class="i1"/>
+        </div>
+        <div class="form-group">
+            <label th:if="${#fields.hasErrors('email')}" th:errors="*{email}" class="validation-message"></label>
+            <input type="text" th:field="*{email}" placeholder="Email" class="i1" autocomplete="off"/>
+        </div>
+        <div class="form-group">
+            <input type="password" th:field="*{password}" name="password" id="password" placeholder="Password"
+                   class="i1"/>
+            <label th:if="${#fields.hasErrors('password')}" th:errors="*{password}" class="validation-message"></label>
+        </div>
+        <div class="form-group">
+            <input type="password" name="confirm_password" id="confirm_password" placeholder="Confirm password"
+                   class="i1"/>
+            <label><span id='message'></span></label>
+        </div>
+        <button type="submit" class="btn-mid">Wyślij</button>
+        <span class="messagesInfo" th:utext="${successMessage}"></span>
+    </form>
+</div>
+<script>
+    $('#confirm_password').on('keyup', function () {
+        if ($('#password').val() == $('#confirm_password').val()) {
+            $('#message').html('Matching').css('color', 'green');
+        } else
+            $('#message').html('Not Matching').css('color', 'red');
+    });
+</script>
+</body>
+</html>

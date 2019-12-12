@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head lang="pl">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Login</title>
+</head>
+<body>
+<div class="wrap">
+    <div class="logo">LOGOWANIE</div>
+    <form th:action="@{login}" method="POST">
+        <div data-tip="Podaj adres e-mail">
+            <input class="i1" type="text" name="email" th:placeholder="Email">
+        </div>
+        <div data-tip="Podaj hasło: minimum 8 znaków">
+            <input class="i1" type="password" th:placeholder="Password" name="password">
+        </div>
+        <div align="center" th:if="${param.error}">
+            <p>Podane dane są niepoprawne</p>
+        </div>
+        <button class="btn-mid" name="Submit" value="Login" type="Submit" th:text="Login"></button>
+    </form>
+    <form th:action="@{registration}" method="get">
+        <br/>
+        <button class="btn-mid" type="Submit">Zarejestruj</button>
+    </form>
+</div>
+</body>
+</html>
