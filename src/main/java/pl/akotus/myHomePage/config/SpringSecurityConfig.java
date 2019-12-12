@@ -52,7 +52,7 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/home").permitAll()
                 .and()
                 .authorizeRequests()
-                .antMatchers( "/home/**").authenticated()
+                .antMatchers( "/auth/**").authenticated()
                 .anyRequest().authenticated()
                 .and()
                 .csrf().disable().formLogin().loginPage("/login")
