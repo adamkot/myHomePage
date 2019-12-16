@@ -11,7 +11,18 @@
 </head>
 <body>
 <style>
-    .container{
+    .block {
+        display: block;
+        width: 100%;
+        border: none;
+        background-color: #222;
+        padding: 14px 28px;
+        font-size: 16px;
+        color: white;
+        cursor: pointer;
+        text-align: center;
+    }
+    .container {
         padding-top: 100px;
     }
 </style>
@@ -31,16 +42,24 @@
         </ul>
     </div>
 </nav>
-
-<div class="container">
-<th:block th:each="home, i: ${homeList}">
-    <div class="row">
-        <h2 th:text="${home.title}"/>
-        <p th:text="${home.text}"/>
-        <p th:text="${home.end}"/>
+<th:block th:if="${itHomePage}">
+    <div class="container">
+        <th:block th:each="home, i: ${homeList}">
+            <div class="row">
+                <h2 th:text="${home.title}"/>
+                <p th:text="${home.description}"/>
+                <p th:text="${'Dodano: ' + home.createDate}"/>
+                <a th:href="${'page?id=' + home.id}">Zobacz więcej</a>
+            </div>
+        </th:block>
     </div>
 </th:block>
-</div>
-</div>
+<th:block th:if="${itPage}">
+    <div class="container">
+        <p th:text="${text}"/>
+        <a th:href="@{home}"><button class="block" type="Button" th:text="Wróć"></button></a>
+    </div>
+</th:block>
+
 </body>
 </html>

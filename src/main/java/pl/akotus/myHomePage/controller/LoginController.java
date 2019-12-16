@@ -48,7 +48,7 @@ public class LoginController {
             modelAndView.addObject("user", user);
             modelAndView.setViewName("registration");
         } else {
-            user.setEnabled(true);
+            user.setEnabled(false);
             user.setCreateDate(new Date());
             userService.saveUser(user);
             modelAndView.addObject("successMessage","poprawnie zapisano!");

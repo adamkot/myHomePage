@@ -37,11 +37,13 @@
             <input class="form-control" type="text" th:field="*{title}" placeholder="Tytuł"/>
         </div>
         <div class="form-group col-md-12">
-            <textarea class="form-control" type="text" th:field="*{text}" placeholder="Treść"/>
+            <textarea class="form-control" type="text" th:field="*{description}" placeholder="Opis"/>
         </div>
-        <div class="form-group col-md-12">
-            <input class="form-control" type="text" th:field="*{end}" placeholder="Zakończenie" autocomplete="off"/>
-        </div>
+        <th:block th:each="cont, i: *{contents}">
+            <div class="form-group col-md-12">
+                <textarea class="form-control" type="text" th:field="*{contents[__${i.index}__].text}" placeholder="Treść"/>
+            </div>
+        </th:block>
         <div class="form-group col-md-4 offset-md-4">
             <button class="block" name="Submit" value="Login" type="Submit" th:text="Wyślij"></button>
         </div>

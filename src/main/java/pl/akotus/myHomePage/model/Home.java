@@ -4,6 +4,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table(name="home")
@@ -17,11 +18,12 @@ public class Home {
     @Column(name="title")
     private String title;
 
-    @Column(name="text", length = 12000)
-    private String text;
+    @Column(name="description", length = 12000)
+    private String description;
 
-    @Column(name="end")
-    private String end;
+    @OneToMany
+    @JoinColumn(name="contents")
+    private List<Contents> contents;
 
     @DateTimeFormat(pattern = "dd-MM-yyyy")
     @Column(name="create_date")
@@ -35,16 +37,20 @@ public class Home {
         return title;
     }
 
-    public String getText() {
-        return text;
-    }
-
-    public String getEnd() {
-        return end;
+    public String getDescription() {
+        return description;
     }
 
     public Date getCreateDate() {
         return createDate;
+    }
+
+    public List<Contents> getContents() {
+        return contents;
+    }
+
+    public void setContents(List<Contents> contents) {
+        this.contents = contents;
     }
 
     public void setId(Integer id) {
@@ -55,12 +61,8 @@ public class Home {
         this.title = title;
     }
 
-    public void setText(String text) {
-        this.text = text;
-    }
-
-    public void setEnd(String end) {
-        this.end = end;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public void setCreateDate(Date createDate) {
@@ -72,8 +74,8 @@ public class Home {
         return "Home{" +
                 "id=" + id +
                 ", title='" + title + '\'' +
-                ", text='" + text + '\'' +
-                ", end='" + end + '\'' +
+                ", description='" + description + '\'' +
+                ", contents=" + contents +
                 ", createDate=" + createDate +
                 '}';
     }
