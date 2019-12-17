@@ -32,4 +32,21 @@ public class Contents {
     public void setText(String text) {
         this.text = text;
     }
+
+    @Override
+    public String toString() {
+        return "Contents{" +
+                "id=" + id +
+                ", text='" + text + '\'' +
+                '}';
+    }
+
+    public Contents(Integer id, String text) {
+        this.id = id;
+        this.text = text;
+    }
+
+    public Contents() {
+
+    }
 }
