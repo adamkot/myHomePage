@@ -7,27 +7,30 @@ import java.util.Date;
 import java.util.List;
 
 @Entity
-@Table(name="home")
+@Table(name = "home")
 public class Home {
 
     @Id
-    @GeneratedValue(strategy= GenerationType.IDENTITY)
-    @Column(name="id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
     private Integer id;
 
-    @Column(name="title")
+    @Column(name = "title")
     private String title;
 
-    @Column(name="description", length = 12000)
+    @Column(name = "description", length = 12000)
     private String description;
 
-    @OneToMany
-    @JoinColumn(name="contents")
+    @OneToMany(cascade = {CascadeType.ALL})
+    @JoinColumn(name = "contents")
     private List<Contents> contents;
 
     @DateTimeFormat(pattern = "dd-MM-yyyy")
-    @Column(name="create_date")
+    @Column(name = "create_date")
     private Date createDate;
+
+    @Column(name = "enabled")
+    private Boolean enabled;
 
     public Integer getId() {
         return id;
@@ -69,6 +72,14 @@ public class Home {
         this.createDate = createDate;
     }
 
+    public Boolean getEnabled() {
+        return enabled;
+    }
+
+    public void setEnabled(Boolean enabled) {
+        this.enabled = enabled;
+    }
+
     @Override
     public String toString() {
         return "Home{" +
@@ -77,6 +88,7 @@ public class Home {
                 ", description='" + description + '\'' +
                 ", contents=" + contents +
                 ", createDate=" + createDate +
+                ", enabled=" + enabled +
                 '}';
     }
 }

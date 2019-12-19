@@ -22,6 +22,7 @@
         cursor: pointer;
         text-align: center;
     }
+
     .container {
         padding-top: 100px;
     }
@@ -31,15 +32,26 @@
         <div class="navbar-header">
             <a class="navbar-brand" href="#">MyHomePage</a>
         </div>
-        <ul class="nav navbar-nav">
-            <li class="active"><a href="#">Home</a></li>
-            <li><a class="btn disabled" href="#">Page 1</a></li>
-            <li><a class="btn disabled" href="#">Page 2</a></li>
-        </ul>
-        <ul class="nav navbar-nav navbar-right">
-            <li><a th:href="@{registration}"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
-            <li><a th:href="@{login}"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
-        </ul>
+        <th:block th:if="${loginUser}">
+            <ul class="nav navbar-nav">
+                <li class="active"><a href="#">Home</a></li>
+                <li><a class="btn" th:href="@{addNewPage}">Add</a></li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li><a th:href="@{logout}"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
+            </ul>
+        </th:block>
+        <th:block th:if="not ${loginUser}">
+            <ul class="nav navbar-nav">
+                <li class="active"><a href="#">Home</a></li>
+                <li><a class="btn disabled" href="#">Page 1</a></li>
+                <li><a class="btn disabled" href="#">Page 2</a></li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li><a th:href="@{registration}"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+                <li><a th:href="@{login}"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+            </ul>
+        </th:block>
     </div>
 </nav>
 <th:block th:if="${itHomePage}">
@@ -50,14 +62,23 @@
                 <p th:text="${home.description}"/>
                 <p th:text="${'Dodano: ' + home.createDate}"/>
                 <a th:href="${'page?id=' + home.id}">Zobacz więcej</a>
+                <a th:if="${loginUser}" th:href="${'page?delete=' + home.id}">Usuń wspis</a>
             </div>
         </th:block>
     </div>
 </th:block>
 <th:block th:if="${itPage}">
     <div class="container">
-        <p th:text="${text}"/>
-        <a th:href="@{home}"><button class="block" type="Button" th:text="Wróć"></button></a>
+        <h2 th:text="${home.title}"/>
+        <p th:text="${home.description}"/>
+        <th:block th:each="content, i: ${home.contents}">
+            <p th:text="${content.text}"/>
+            <textarea class="form-control" th:field="*{home.contents[__${i.index}__].code}" readonly/>
+        </th:block>
+        <p th:text="${home.createDate}"/>
+        <a th:href="@{home}">
+            <button class="block" type="Button" th:text="Wróć"></button>
+        </a>
     </div>
 </th:block>
 

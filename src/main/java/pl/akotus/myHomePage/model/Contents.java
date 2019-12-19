@@ -14,8 +14,8 @@ public class Contents {
     @Column(name="text")
     private String text;
 
-    //attachment (image)
-
+    @Column(name="code")
+    private String code;
 
     public Integer getId() {
         return id;
@@ -33,17 +33,26 @@ public class Contents {
         this.text = text;
     }
 
+    public String getCode() {
+        return code;
+    }
+
+    public void setCode(String code) {
+        this.code = code;
+    }
+
     @Override
     public String toString() {
         return "Contents{" +
                 "id=" + id +
                 ", text='" + text + '\'' +
+                ", code='" + code + '\'' +
                 '}';
     }
 
-    public Contents(Integer id, String text) {
-        this.id = id;
+    public Contents(String text, String code) {
         this.text = text;
+        this.code = code;
     }
 
     public Contents() {

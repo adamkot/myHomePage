@@ -46,6 +46,7 @@ public class AddNewPageController {
             throws IOException {
         ModelAndView modelAndView = new ModelAndView();
         home.setCreateDate(new Date());
+        System.out.println("##################### " + home);
         homeService.save(home);
         if (file.length > 0) {
             for (int i = 0; i < file.length; i++) {
