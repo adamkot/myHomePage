@@ -46,8 +46,6 @@ public class AddNewPageController {
             throws IOException {
         ModelAndView modelAndView = new ModelAndView();
         home.setCreateDate(new Date());
-        System.out.println("##################### " + home);
-        homeService.save(home);
         if (file.length > 0) {
             for (int i = 0; i < file.length; i++) {
                 MultipartFile files = file[i];
@@ -57,8 +55,9 @@ public class AddNewPageController {
                     }
                     UUID uuid = UUID.randomUUID();
                     Attachment attachement = new Attachment(uuid.toString(), files.getOriginalFilename(),
-                            home.getId(), i, (double) files.getSize(), files.getContentType());
+                            (double) files.getSize(), files.getContentType());
                     attachmentService.save(attachement);
+                    home.getContents().get(i).setImage(attachmentService.getByFileName(attachement.getFileName()));
                     byte[] bytes = files.getBytes();
                     File fsFile = new File("images/" + attachement.getFileName());
                     fsFile.createNewFile();
@@ -68,6 +67,8 @@ public class AddNewPageController {
                 }
             }
         }
+        //System.out.println("##################### " + home);
+        homeService.save(home);
         modelAndView.setViewName("redirect:addNewPage");
         return modelAndView;
     }

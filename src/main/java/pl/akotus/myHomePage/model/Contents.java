@@ -3,7 +3,7 @@ package pl.akotus.myHomePage.model;
 import javax.persistence.*;
 
 @Entity
-@Table(name="page")
+@Table(name="contents")
 public class Contents {
 
     @Id
@@ -16,6 +16,10 @@ public class Contents {
 
     @Column(name="code")
     private String code;
+
+    @OneToOne
+    @JoinColumn(name="image")
+    private Attachment image;
 
     public Integer getId() {
         return id;
@@ -41,18 +45,28 @@ public class Contents {
         this.code = code;
     }
 
+    public Attachment getImage() {
+        return image;
+    }
+
+    public void setImage(Attachment image) {
+        this.image = image;
+    }
+
     @Override
     public String toString() {
         return "Contents{" +
                 "id=" + id +
                 ", text='" + text + '\'' +
                 ", code='" + code + '\'' +
+                ", image='" + image + '\'' +
                 '}';
     }
 
-    public Contents(String text, String code) {
+    public Contents(String text, String code, Attachment image) {
         this.text = text;
         this.code = code;
+        this.image = image;
     }
 
     public Contents() {
