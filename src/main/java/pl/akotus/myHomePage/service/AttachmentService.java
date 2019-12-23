@@ -18,6 +18,8 @@ public class AttachmentService {
         attachmentRepository.save(attachment);
     }
 
+    public Attachment getById(Integer id) {return attachmentRepository.findById(id).get();}
+
     public Attachment getByFileName(String fileName) {
         return attachmentRepository.getByFileName(fileName);
     }

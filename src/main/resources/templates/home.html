@@ -26,6 +26,16 @@
     .container {
         padding-top: 100px;
     }
+
+    .image{
+        max-width: 70%;
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+        width: 50%;
+        padding-top: 10px;
+    }
+
 </style>
 <nav class="navbar navbar-inverse navbar-fixed-top">
     <div class="container-fluid">
@@ -44,8 +54,7 @@
         <th:block th:if="not ${loginUser}">
             <ul class="nav navbar-nav">
                 <li class="active"><a href="#">Home</a></li>
-                <li><a class="btn disabled" href="#">Page 1</a></li>
-                <li><a class="btn disabled" href="#">Page 2</a></li>
+                <li><a class="btn disabled" href="#">O_mnie</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 <li><a th:href="@{registration}"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
@@ -73,9 +82,12 @@
         <p th:text="${home.description}"/>
         <th:block th:each="content, i: ${home.contents}">
             <p th:text="${content.text}"/>
-            <textarea class="form-control" th:field="*{home.contents[__${i.index}__].code}" readonly/>
+            <div th:if="${content.code != ''}">
+                <textarea class="form-control" th:field="*{home.contents[__${i.index}__].code}" readonly/>
+            </div>
+            <img th:src="${'image?id=' + content.image.id}" class="image"/>
         </th:block>
-        <p th:text="${home.createDate}"/>
+        <p th:text="${'Dodano: ' + home.createDate}"/>
         <a th:href="@{home}">
             <button class="block" type="Button" th:text="Wróć"></button>
         </a>
