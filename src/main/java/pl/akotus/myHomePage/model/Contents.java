@@ -1,7 +1,15 @@
 package pl.akotus.myHomePage.model;
 
+import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 import javax.persistence.*;
 
+@AllArgsConstructor(access= AccessLevel.PUBLIC)
+@NoArgsConstructor(access= AccessLevel.PUBLIC)
+@Data
 @Entity
 @Table(name="contents")
 public class Contents {
@@ -21,38 +29,6 @@ public class Contents {
     @JoinColumn(name="image")
     private Attachment image;
 
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public String getText() {
-        return text;
-    }
-
-    public void setText(String text) {
-        this.text = text;
-    }
-
-    public String getCode() {
-        return code;
-    }
-
-    public void setCode(String code) {
-        this.code = code;
-    }
-
-    public Attachment getImage() {
-        return image;
-    }
-
-    public void setImage(Attachment image) {
-        this.image = image;
-    }
-
     @Override
     public String toString() {
         return "Contents{" +
@@ -63,13 +39,4 @@ public class Contents {
                 '}';
     }
 
-    public Contents(String text, String code, Attachment image) {
-        this.text = text;
-        this.code = code;
-        this.image = image;
-    }
-
-    public Contents() {
-
-    }
 }

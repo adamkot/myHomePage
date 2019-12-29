@@ -15,13 +15,16 @@ import pl.akotus.myHomePage.model.Home;
 import pl.akotus.myHomePage.model.User;
 import pl.akotus.myHomePage.service.AttachmentService;
 import pl.akotus.myHomePage.service.HomeService;
+import pl.akotus.myHomePage.service.StatisticService;
 import pl.akotus.myHomePage.service.UserService;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.util.Date;
 
 import static org.springframework.util.StreamUtils.BUFFER_SIZE;
 
@@ -37,12 +40,17 @@ public class HomePageController {
     @Autowired
     private AttachmentService attachmentService;
 
+    @Autowired
+    private StatisticService statisticService;
+
     @RequestMapping(value = { "/", "/home"}, method = RequestMethod.GET)
-    public ModelAndView homePageGet() {
+    public ModelAndView homePageGet(HttpServletRequest request) {
         ModelAndView modelAndView = new ModelAndView();
         User user = userService.findByEmail(SecurityContextHolder.getContext().getAuthentication().getName());
         if (user != null) {
             modelAndView.addObject("loginUser", true);
+        } else {
+            statisticService.save(new Date(), request.getRemoteAddr());
         }
         modelAndView.addObject("homeList", homeService.getAll());
         modelAndView.addObject("itHomePage", true);

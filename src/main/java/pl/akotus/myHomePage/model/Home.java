@@ -1,11 +1,15 @@
 package pl.akotus.myHomePage.model;
 
+import lombok.*;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import java.util.Date;
 import java.util.List;
 
+@AllArgsConstructor(access= AccessLevel.PUBLIC)
+@NoArgsConstructor(access= AccessLevel.PUBLIC)
+@Data
 @Entity
 @Table(name = "home")
 public class Home {
@@ -21,6 +25,7 @@ public class Home {
     @Column(name = "description", length = 12000)
     private String description;
 
+    @Setter(AccessLevel.PUBLIC)
     @OneToMany(cascade = {CascadeType.ALL})
     @JoinColumn(name = "contents")
     private List<Contents> contents;
@@ -31,54 +36,6 @@ public class Home {
 
     @Column(name = "enabled")
     private Boolean enabled;
-
-    public Integer getId() {
-        return id;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public Date getCreateDate() {
-        return createDate;
-    }
-
-    public List<Contents> getContents() {
-        return contents;
-    }
-
-    public void setContents(List<Contents> contents) {
-        this.contents = contents;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public void setCreateDate(Date createDate) {
-        this.createDate = createDate;
-    }
-
-    public Boolean getEnabled() {
-        return enabled;
-    }
-
-    public void setEnabled(Boolean enabled) {
-        this.enabled = enabled;
-    }
 
     @Override
     public String toString() {

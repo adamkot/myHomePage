@@ -1,7 +1,15 @@
 package pl.akotus.myHomePage.model;
 
+import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 import javax.persistence.*;
 
+@AllArgsConstructor(access= AccessLevel.PUBLIC)
+@NoArgsConstructor(access= AccessLevel.PUBLIC)
+@Data
 @Entity
 @Table(name = "attachment")
 public class Attachment {
@@ -22,46 +30,6 @@ public class Attachment {
     @Column(name = "content_type")
     private String contentType;
 
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public String getFileName() {
-        return fileName;
-    }
-
-    public void setFileName(String fileName) {
-        this.fileName = fileName;
-    }
-
-    public String getOriginalFileName() {
-        return originalFileName;
-    }
-
-    public void setOriginalFileName(String originalFileName) {
-        this.originalFileName = originalFileName;
-    }
-
-    public Double getSizeOfFile() {
-        return sizeOfFile;
-    }
-
-    public void setSizeOfFile(Double sizeOfFile) {
-        this.sizeOfFile = sizeOfFile;
-    }
-
-    public String getContentType() {
-        return contentType;
-    }
-
-    public void setContentType(String contentType) {
-        this.contentType = contentType;
-    }
-
     @Override
     public String toString() {
         return "Attachment{" +
@@ -73,25 +41,10 @@ public class Attachment {
                 '}';
     }
 
-    public Attachment(Integer id, String fileName, String originalFileName, Double sizeOfFile,
-                      String contentType) {
-        this.id = id;
-        this.fileName = fileName;
-        this.originalFileName = originalFileName;
-        this.sizeOfFile = sizeOfFile;
-        this.contentType = contentType;
-    }
-
     public Attachment(String fileName, String originalFileName, Double sizeOfFile, String contentType) {
         this.fileName = fileName;
         this.originalFileName = originalFileName;
         this.sizeOfFile = sizeOfFile;
         this.contentType = contentType;
     }
-
-    public Attachment() {
-
-    }
-
-
 }

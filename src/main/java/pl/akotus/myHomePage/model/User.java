@@ -1,5 +1,9 @@
 package pl.akotus.myHomePage.model;
 
+import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.hibernate.validator.constraints.Length;
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -8,6 +12,9 @@ import javax.validation.constraints.Email;
 import java.util.Date;
 import java.util.List;
 
+@AllArgsConstructor(access= AccessLevel.PUBLIC)
+@NoArgsConstructor(access= AccessLevel.PUBLIC)
+@Data
 @Entity
 @Table(name = "user")
 public class User {
@@ -50,78 +57,6 @@ public class User {
     @JoinTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
     private List<Role> roles;
 
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public Date getCreateDate() {
-        return createDate;
-    }
-
-    public void setCreateDate(Date createDate) {
-        this.createDate = createDate;
-    }
-
-    public Date getLastActivityDate() {
-        return lastActivityDate;
-    }
-
-    public void setLastActivityDate(Date lastActivityDate) {
-        this.lastActivityDate = lastActivityDate;
-    }
-
-    public Boolean getEnabled() {
-        return enabled;
-    }
-
-    public void setEnabled(Boolean enabled) {
-        this.enabled = enabled;
-    }
-
-    public List<Role> getRoles() {
-        return roles;
-    }
-
-    public void setRoles(List<Role> roles) {
-        this.roles = roles;
-    }
-
     @Override
     public String toString() {
         return "User [id=" + id + ", password=" + password + ", name=" + name + ", lastName=" + lastName + ", email="
@@ -129,31 +64,5 @@ public class User {
                 + ", lastActivityDate=" + lastActivityDate + ", roles=" + roles
                 + "]";
     }
-
-    /*********************** Konstruktory ***********************/
-
-    public User() {
-        super();
-    }
-
-    public User(Integer id,
-                @Length(min = 6, message = "*Twoje hasło musi się składać z minimum 6 znaków") String password,
-                @Length(min = 3, message = "*Podaj imię") String name,
-                @Length(min = 3, message = "*Podaj nazwisko") String lastName,
-                @Email(message = "*Podaj email") String email, Boolean enabled, Date createDate,
-                Date lastActivityDate, List<Role> roles) {
-        super();
-        this.id = id;
-        this.password = password;
-        this.name = name;
-        this.lastName = lastName;
-        this.email = email;
-        this.enabled = enabled;
-        this.createDate = createDate;
-        this.lastActivityDate = lastActivityDate;
-        this.roles = roles;
-    }
-
-
-
+    
 }

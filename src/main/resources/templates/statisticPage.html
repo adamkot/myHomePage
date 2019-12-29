@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Statistic</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+</head>
+<body>
+<style>
+    .block {
+        display: block;
+        width: 100%;
+        border: none;
+        background-color: #222;
+        padding: 14px 28px;
+        font-size: 16px;
+        color: white;
+        cursor: pointer;
+        text-align: center;
+    }
+
+    .container {
+        padding-top: 100px;
+    }
+
+    .image {
+        max-width: 70%;
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+        width: 50%;
+        padding-top: 10px;
+    }
+
+</style>
+<nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="#">MyHomePage</a>
+        </div>
+        <ul class="nav navbar-nav">
+            <li class="active"><a href="#">Home</a></li>
+            <li><a class="btn" th:href="@{addNewPage}">Add</a></li>
+            <li><a class="btn" th:href="@{statisticPage}">Statistic</a></li>
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+            <li><a th:href="@{logout}"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
+        </ul>
+    </div>
+</nav>
+<div class="container">
+    <h2>Statystyka wejść</h2>
+    <table class="table table-bordered">
+        <thead>
+        <tr>
+            <th>Data wejścia</th>
+            <th>Pobrany adres</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="stat, i: ${statisticList}">
+            <td th:text="${stat.entryDate}"/>
+            <td th:text="${stat.ipAddress}"/>
+        </tr>
+        </tbody>
+    </table>
+    <a th:href="@{home}">
+        <button class="block" type="Button" th:text="Wróć"></button>
+    </a>
+</div>
+</body>
+</html>
